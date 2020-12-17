@@ -1,5 +1,7 @@
 import unittest
 from unittest.mock import patch, mock_open
+from unittest import mock
+from pathlib import Path
 from src.zad1 import File
 
 
@@ -25,6 +27,21 @@ class TestFile(unittest.TestCase):
 
         open_mock.assert_called_once_with(path, 'w')
         open_mock().write.assert_called_once_with("Lorem ipsum dolor sit amet")
+
+    @mock.patch('src.zad1.Path')
+    def test_delete_file_exists(self, mock_Path):
+        path = "./mock/file_to_delete.txt"
+        mock_Path(path).exists.return_value = True
+
+        self.file.delete(path)
+        mock_Path(path).unlink.assert_called_with()
+
+    @mock.patch('src.zad1.Path')
+    def test_delete_file_doesnt_exists(self, mock_Path):
+        path = "./mock/file_to_delete.txt"
+        mock_Path(path).exists.return_value = False
+
+        self.assertRaises(FileExistsError, self.file.delete, path)
 
     def setUp(self):
         self.file = File()
