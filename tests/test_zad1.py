@@ -15,6 +15,17 @@ class TestFile(unittest.TestCase):
 
         open_mock.assert_called_once_with(path, 'r')
 
+    def test_write(self):
+        content = "Lorem ipsum dolor sit amet"
+        path = "./mock/file2.txt"
+        open_mock = mock_open()
+
+        with patch('builtins.open', open_mock):
+            self.file.write(path, content)
+
+        open_mock.assert_called_once_with(path, 'w')
+        open_mock().write.assert_called_once_with("Lorem ipsum dolor sit amet")
+
     def setUp(self):
         self.file = File()
 
