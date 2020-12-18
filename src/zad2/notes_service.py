@@ -1,4 +1,4 @@
-from notes_storage import NotesStorage
+from zad2.notes_storage import NotesStorage
 
 
 class NotesService:
@@ -11,6 +11,7 @@ class NotesService:
             raise TypeError("Input has to be object of Note class")
 
         self.notes.add(note)
+        return self.notes
 
     def averageOf(self, name):
         allNotes = self.notes.get_all_notes_of(name)
