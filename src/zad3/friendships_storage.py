@@ -1,4 +1,4 @@
-from friendships import FriendShips
+from zad3.friendships import FriendShips
 
 
 class FriendShipsStorage:
