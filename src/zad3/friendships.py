@@ -9,7 +9,7 @@ class FriendShips:
         if not person or not friend or person.isspace() or friend.isspace():
             raise ValueError("Strings cannot be empty!")
 
-        if not person in self.friends:
+        if person not in self.friends:
             self.friends[person] = [friend]
         else:
             self.friends[person].append(friend)
