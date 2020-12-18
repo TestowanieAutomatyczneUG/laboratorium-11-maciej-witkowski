@@ -15,11 +15,6 @@ class FriendShips:
             self.friends[person].append(friend)
 
     def makeFriends(self, person1, person2):
-        if not (isinstance(person1, str) and isinstance(person2, str)):
-            raise TypeError("Inputs must be of string type!")
-        if not person1 or not person2 or person1.isspace() or person2.isspace():
-            raise ValueError("Strings cannot be empty!")
-
         self.addFriend(person1, person2)
         self.addFriend(person2, person1)
 
@@ -30,7 +25,7 @@ class FriendShips:
             return False
 
     def areFriends(self, person1, person2):
-        if (person1 in self.friends) and (person2 in self.friends[person1]):
+        if (person1 in self.friends and person2 in self.friends) and (person2 in self.friends[person1] and person1 in self.friends[person2]):
             return True
         else:
             return False
